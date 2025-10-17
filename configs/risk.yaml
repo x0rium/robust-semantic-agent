@@ -1,0 +1,22 @@
+# Risk Configuration: CVaR Settings
+# Feature: 002-full-prototype
+
+# CVaR Parameters
+risk:
+  mode: cvar
+  alpha: 0.1  # Tail risk level (0.05 very conservative, 0.20 moderate)
+  nested: false
+
+# Sample size requirements for CVaR accuracy
+# α=0.10: n≥200
+# α=0.05: n≥400
+# α=0.01: n≥2000
+min_samples:
+  alpha_0_10: 200
+  alpha_0_05: 400
+  alpha_0_01: 2000
+
+# CVaR Validation
+validation:
+  analytical_test: true  # Validate against Gaussian/uniform analytical formulas
+  tolerance: 0.01  # <1% error tolerance

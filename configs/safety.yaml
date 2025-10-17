@@ -1,0 +1,27 @@
+# Safety Configuration: CBF-QP Settings
+# Feature: 002-full-prototype
+
+safety:
+  cbf: true
+  barrier_alpha: 0.5  # Class-K function α parameter
+
+  # QP Solver Configuration
+  qp:
+    solver: OSQP  # Default solver (shipped with cvxpy)
+    max_iter: 50
+    slack_penalty: 1000.0  # Penalty for constraint relaxation
+    slack_tolerance: 1e-6  # Threshold for infeasibility warning
+    warm_start: true  # Use previous solution as initial guess
+    verbose: false
+    eps_abs: 1e-5  # Absolute tolerance
+    eps_rel: 1e-5  # Relative tolerance
+
+  # Supermartingale Constraint (Stochastic CBF)
+  stochastic:
+    enabled: true
+    expectation_samples: 100  # Monte Carlo samples for E[B(x+)|x,u]
+
+  # Logging
+  logging:
+    activation_threshold: 0.01  # Log if ≥1% of actions modified
+    warn_infeasible: true  # Warn when QP uses slack variable

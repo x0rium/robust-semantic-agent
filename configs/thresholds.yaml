@@ -1,0 +1,24 @@
+# Semantic Thresholds Configuration
+# Feature: 002-full-prototype
+
+# Belnap Status Assignment Thresholds
+thresholds:
+  auto: true  # Auto-tune via calibration script
+  ece_target: 0.05  # Target Expected Calibration Error
+
+  # Manual thresholds (used when auto=false)
+  tau: 0.68  # Support threshold (must be > 0.5)
+  tau_prime: 0.32  # Countersupport threshold (must be < 0.5)
+
+# Calibration Settings
+calibration:
+  method: isotonic_regression  # or platt_scaling, temperature_scaling
+  validation_split: 0.2
+  episodes: 500
+  convergence_tolerance: 0.001
+
+# Cost Matrix (for calibration objective)
+costs:
+  false_negative: 1.0  # Cost of missing true claim
+  false_positive: 1.0  # Cost of accepting false claim
+  contradiction_penalty: 0.5  # Additional penalty for v=⊤

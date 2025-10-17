@@ -1,0 +1,25 @@
+{
+  "episodes": 20,
+  "total_steps": 972,
+  "mean_return": -48.228581767303965,
+  "std_return": 21.973490483763822,
+  "goal_success_rate": 0.0,
+  "cvar_01": -81.53737854902111,
+  "cvar_01_baseline": null,
+  "success_criteria": {
+    "SC-001 (zero violations)": true,
+    "SC-002 (filter \u22651%)": true,
+    "SC-010 (CVaR \u2265 baseline)": null
+  },
+  "safety": {
+    "total_steps": 972,
+    "violations": 0,
+    "violation_rate": 0.0,
+    "episodes_with_violations": 0,
+    "episodes_total": 20,
+    "filter_activations": 972,
+    "filter_activation_rate": 1.0,
+    "sc001_pass": true,
+    "sc002_pass": true
+  }
+}

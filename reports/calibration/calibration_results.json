@@ -1,0 +1,12 @@
+{
+  "tau_optimal": 0.9289473684210526,
+  "tau_prime_optimal": 0.05,
+  "ece_before": 0.05719999999999992,
+  "ece_after": 0.0,
+  "brier_before": 0.17271999999999996,
+  "brier_after": 0.25,
+  "auc_before": 0.7498880000000001,
+  "auc_after": 0.485792,
+  "n_samples": 500,
+  "target_ece": 0.05
+}

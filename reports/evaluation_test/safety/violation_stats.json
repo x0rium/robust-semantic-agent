@@ -1,0 +1,11 @@
+{
+  "total_steps": 972,
+  "violations": 0,
+  "violation_rate": 0.0,
+  "episodes_with_violations": 0,
+  "episodes_total": 20,
+  "filter_activations": 972,
+  "filter_activation_rate": 1.0,
+  "sc001_pass": true,
+  "sc002_pass": true
+}

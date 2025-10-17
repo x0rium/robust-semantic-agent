@@ -1,0 +1,77 @@
+# Default Configuration: Robust Semantic Agent
+# Feature: 002-full-prototype
+# Generated: 2025-10-16
+
+# Reproducibility
+seed: 42
+
+# MDP Parameters
+discount: 0.98
+horizon: 50
+
+# Risk Management (CVaR)
+risk:
+  mode: cvar
+  alpha: 0.1  # Lower = more risk-averse (0.05-0.20 recommended)
+  nested: false  # Use nested CVaR (future feature)
+
+# Safety Filter (CBF-QP)
+safety:
+  cbf: true
+  barrier_alpha: 0.5  # CBF class-K function parameter
+  qp:
+    solver: OSQP
+    max_iter: 50
+    slack_penalty: 1000.0
+    slack_tolerance: 1e-6
+    warm_start: true
+    verbose: false
+
+# Query Action
+query:
+  enabled: false  # Enable query action (US3)
+  cost: 0.2  # Cost of querying
+  delta_star: 0.15  # Minimum EVI threshold for triggering query
+
+# Belief Tracking (Particle Filter)
+belief:
+  particles: 5000  # Number of particles (5k standard, 10k high precision)
+  resample_threshold: 0.5  # ESS threshold for resampling (as fraction of N)
+  process_noise: 0.01  # Process noise standard deviation
+
+# Credal Sets (Contradictory Information)
+credal:
+  K: 5  # Number of extreme posteriors
+  trust_init: 0.7  # Initial source trust r_s
+  lambda_s_max: 3.0  # Maximum logit magnitude
+
+# Semantic Layer (Belnap)
+thresholds:
+  auto: true  # Auto-tune τ, τ' via calibration
+  ece_target: 0.05  # Expected Calibration Error target
+  tau: 0.68  # Support threshold (if auto=false)
+  tau_prime: 0.32  # Countersupport threshold (if auto=false)
+
+# Environment (Forbidden Circle)
+env:
+  state_dim: 2
+  action_dim: 2
+  obstacle_radius: 0.3
+  obstacle_center: [0.0, 0.0]
+  goal_region: [0.8, 0.8]
+  goal_radius: 0.1
+  observation_noise: 0.1
+  max_action: 0.15
+
+# Performance
+performance:
+  target_hz: 30  # Minimum execution rate (Hz)
+  warn_threshold: 0.9  # Warn if < 90% of target
+
+# Logging
+logging:
+  level: INFO
+  episode_log: true
+  episode_log_dir: runs
+  safety_filter_log: true
+  query_log: true

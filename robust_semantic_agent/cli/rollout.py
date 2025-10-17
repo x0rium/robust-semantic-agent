@@ -177,7 +177,9 @@ def main():
         if entropy_reductions:
             mean_reduction = np.mean(entropy_reductions)
             print(f"  Average Entropy Reduction: {mean_reduction:.2%}")
-            print(f"  SC-007 (≥20% reduction): {'✅ PASS' if mean_reduction >= 0.20 else '❌ FAIL'}")
+            print(
+                f"  SC-007 (≥20% reduction): {'✅ PASS' if mean_reduction >= 0.20 else '❌ FAIL'}"
+            )
 
     print(f"\nLogs saved to: {log_file}")
     print("=" * 60)

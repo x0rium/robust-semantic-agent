@@ -10,7 +10,6 @@ References:
 - FR-006: CVaR-based decision making
 """
 
-
 import numpy as np
 
 

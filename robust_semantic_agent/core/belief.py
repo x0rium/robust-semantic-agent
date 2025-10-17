@@ -15,7 +15,6 @@ References:
 - FR-002: Commutative update requirement (TV ≤ 1e-6)
 """
 
-
 import numpy as np
 from scipy.stats import norm
 

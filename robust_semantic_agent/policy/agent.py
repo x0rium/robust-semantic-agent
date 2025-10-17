@@ -144,9 +144,7 @@ class Agent:
             )
 
         if not np.all(np.isfinite(observation)):
-            raise ValueError(
-                f"Observation contains invalid values: {observation}"
-            )
+            raise ValueError(f"Observation contains invalid values: {observation}")
         # Update belief with observation
         obs_noise = self.config.env.observation_noise
         self.belief.update_obs(observation, obs_noise)
@@ -288,8 +286,8 @@ class Agent:
         if source_trust is None:
             # Safely get trust_init from config with fallback chain
             r_s_init = 0.7  # Default fallback
-            if hasattr(self.config, 'credal'):
-                r_s_init = getattr(self.config.credal, 'trust_init', 0.7)
+            if hasattr(self.config, "credal"):
+                r_s_init = getattr(self.config.credal, "trust_init", 0.7)
             source_trust = SourceTrust(r_s=r_s_init)
 
         # Apply message to belief
@@ -307,13 +305,12 @@ class Agent:
             ValueError: If configuration is invalid
         """
         # Validate belief parameters
-        if not hasattr(self.config, 'belief'):
+        if not hasattr(self.config, "belief"):
             raise ValueError("Config missing 'belief' section")
 
         if self.config.belief.particles < 100:
             raise ValueError(
-                f"Too few particles: {self.config.belief.particles}. "
-                "Minimum 100 for production."
+                f"Too few particles: {self.config.belief.particles}. " "Minimum 100 for production."
             )
 
         if self.config.belief.particles > 100000:
@@ -329,7 +326,7 @@ class Agent:
             )
 
         # Validate environment parameters
-        if not hasattr(self.config, 'env'):
+        if not hasattr(self.config, "env"):
             raise ValueError("Config missing 'env' section")
 
         if self.config.env.state_dim < 1:
@@ -342,7 +339,7 @@ class Agent:
             )
 
         # Validate safety parameters if CBF enabled
-        if hasattr(self.config, 'safety') and self.config.safety.cbf:
+        if hasattr(self.config, "safety") and self.config.safety.cbf:
             if self.config.safety.barrier_alpha <= 0:
                 raise ValueError(
                     f"Invalid barrier_alpha: {self.config.safety.barrier_alpha}. "
@@ -356,25 +353,20 @@ class Agent:
                 )
 
         # Validate credal parameters (optional section)
-        if hasattr(self.config, 'credal'):
-            trust_init = getattr(self.config.credal, 'trust_init', 0.7)
+        if hasattr(self.config, "credal"):
+            trust_init = getattr(self.config.credal, "trust_init", 0.7)
             if not 0.0 < trust_init < 1.0:
-                raise ValueError(
-                    f"Invalid trust_init: {trust_init}. Must be in (0, 1)."
-                )
+                raise ValueError(f"Invalid trust_init: {trust_init}. Must be in (0, 1).")
             self.logger.debug(f"Credal settings: trust_init={trust_init}")
 
         # Validate query parameters if enabled
-        if hasattr(self.config, 'query') and self.config.query.enabled:
+        if hasattr(self.config, "query") and self.config.query.enabled:
             if self.config.query.cost < 0:
-                raise ValueError(
-                    f"Invalid query cost: {self.config.query.cost}. Must be >= 0."
-                )
+                raise ValueError(f"Invalid query cost: {self.config.query.cost}. Must be >= 0.")
 
             if self.config.query.delta_star <= 0:
                 raise ValueError(
-                    f"Invalid delta_star: {self.config.query.delta_star}. "
-                    "Must be positive."
+                    f"Invalid delta_star: {self.config.query.delta_star}. " "Must be positive."
                 )
 
         self.logger.info("✓ Configuration validated successfully")

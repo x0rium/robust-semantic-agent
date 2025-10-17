@@ -58,7 +58,7 @@ class TestQueryActionROI:
         query_triggered = False
         evi_at_trigger = None
 
-        for step in range(50):
+        for _step in range(50):
             action, info = agent.act(obs)
 
             # Check if query was triggered
@@ -103,7 +103,7 @@ class TestQueryActionROI:
         entropy_before = None
         entropy_after = None
 
-        for step in range(50):
+        for _step in range(50):
             # Measure entropy before action
             H_before = agent.belief.entropy()
 
@@ -151,7 +151,7 @@ class TestQueryActionROI:
         config_no_query.query.enabled = False
 
         regret_no_query = []
-        for ep in range(n_episodes):
+        for _ep in range(n_episodes):
             env = ForbiddenCircleEnv(config_no_query)
             agent = Agent(config_no_query)
 
@@ -182,7 +182,7 @@ class TestQueryActionROI:
         config_with_query.query.cost = 0.02
 
         regret_with_query = []
-        for ep in range(n_episodes):
+        for _ep in range(n_episodes):
             env = ForbiddenCircleEnv(config_with_query)
             agent = Agent(config_with_query)
 
@@ -215,7 +215,7 @@ class TestQueryActionROI:
         # NOTE: Query ROI highly depends on trained policy and proper value function
         # For prototype with simple proportional policy, query may not improve regret
         # This is expected - query benefit requires calibrated EVI + trained policy
-        print(f"\n✓ Query ROI test completed:")
+        print("\n✓ Query ROI test completed:")
         print(f"  Mean regret (no query): {mean_regret_no_query:.2f}")
         print(f"  Mean regret (with query): {mean_regret_with_query:.2f}")
         print(f"  Reduction: {reduction:.2%}")
@@ -228,9 +228,9 @@ class TestQueryActionROI:
         # Relaxed requirement: Query shouldn't catastrophically increase regret
         # Allow up to 200% increase (2x worse) for prototype
         # Aspirational: reduction >= 0.10 (requires trained policy)
-        assert reduction >= -2.0, (
-            f"Query should not catastrophically increase regret: {reduction:.2%} reduction"
-        )
+        assert (
+            reduction >= -2.0
+        ), f"Query should not catastrophically increase regret: {reduction:.2%} reduction"
 
     def test_query_maintains_safety(self, config):
         """
@@ -245,7 +245,7 @@ class TestQueryActionROI:
         violations = 0
         queries_triggered = 0
 
-        for ep in range(10):
+        for _ep in range(10):
             env = ForbiddenCircleEnv(config)
             agent = Agent(config)
 

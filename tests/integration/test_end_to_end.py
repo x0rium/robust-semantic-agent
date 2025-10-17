@@ -89,7 +89,7 @@ class TestEndToEndSystem:
 
                 episode = Episode(episode_id=ep_idx)
 
-                for step in range(max_steps):
+                for _step in range(max_steps):
                     # Agent action
                     action, info = agent.act(obs)
 
@@ -165,7 +165,7 @@ class TestEndToEndSystem:
             generate_cvar_curves(episodes, alphas, str(cvar_path))
             generate_tail_distributions(episodes, str(tail_path))
             generate_barrier_traces(episodes, str(barrier_path), max_episodes=5)
-            violation_stats = compute_violation_rates(episodes)
+            compute_violation_rates(episodes)
 
             print(f"✓ Reports generated in {output_dir}")
             print(f"  CVaR curves: {cvar_path.exists()}")
@@ -186,9 +186,7 @@ class TestEndToEndSystem:
             print(f"Goal success rate: {goal_success_rate:.1%}")
 
             # Assertions
-            assert (
-                violation_count == 0
-            ), f"SC-001 FAILED: {violation_count} violations detected"
+            assert violation_count == 0, f"SC-001 FAILED: {violation_count} violations detected"
             assert (
                 filter_activation_rate >= 0.01
             ), f"SC-002 FAILED: Filter rate {filter_activation_rate:.2%} < 1%"
@@ -233,7 +231,7 @@ class TestEndToEndSystem:
         credal_set_created = False
         violation_count = 0
 
-        for step in range(20):
+        for _step in range(20):
             # Get messages from environment
             messages = env.get_messages()
             for msg in messages:
@@ -259,7 +257,7 @@ class TestEndToEndSystem:
             if done:
                 break
 
-        print(f"\n✓ Contradiction test complete")
+        print("\n✓ Contradiction test complete")
         print(f"  Credal set created: {credal_set_created}")
         print(f"  Violations: {violation_count}")
 
@@ -294,7 +292,7 @@ class TestEndToEndSystem:
         agent.reset()
 
         # Run until high uncertainty
-        for step in range(10):
+        for _step in range(10):
             action, info = agent.act(obs)
             obs_next, reward, done, env_info = env.step(action)
             obs = obs_next
@@ -312,7 +310,7 @@ class TestEndToEndSystem:
             agent.belief, value_fn=value_fn, obs_noise=env.obs_noise, n_samples=50
         )
 
-        print(f"\n✓ Query action test")
+        print("\n✓ Query action test")
         print(f"  EVI: {evi_value:.4f}")
         print(f"  Threshold: {evi_threshold:.4f}")
         print(f"  Query triggered: {evi_value >= evi_threshold}")

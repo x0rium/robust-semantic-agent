@@ -105,8 +105,8 @@ class TestEVIComputation:
         evi_high = evi(belief_high, value_fn, obs_noise=0.1, n_samples=30)
 
         # Magnitude should be higher for uncertain belief
-        assert (
-            abs(evi_high) > abs(evi_low)
+        assert abs(evi_high) > abs(
+            evi_low
         ), f"Higher uncertainty should have higher |EVI|: |{evi_high}| vs |{evi_low}|"
 
 

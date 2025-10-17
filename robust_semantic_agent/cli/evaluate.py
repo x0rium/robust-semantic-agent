@@ -145,11 +145,11 @@ def main():
 
     # Extract credal sets from episodes (if any)
     credal_sets_found = 0
-    for ep_idx, episode in enumerate(episodes[:5]):  # First 5 episodes
+    for _ep_idx, episode in enumerate(episodes[:5]):  # First 5 episodes
         if "steps" not in episode:
             continue
 
-        for step_idx, step in enumerate(episode["steps"]):
+        for _step_idx, step in enumerate(episode["steps"]):
             info = step.get("info", {})
             if info.get("credal_set_active", False):
                 credal_sets_found += 1

@@ -241,7 +241,7 @@ class TestCostMatrixPenalties:
 
         # NOTE: With grid search, cost matrix effect may be subtle
         # Grid has finite resolution (20 points), so differences may be < 1 grid step
-        print(f"\n✓ Cost matrix calibration:")
+        print("\n✓ Cost matrix calibration:")
         print(f"  Neutral: τ={tau_neutral:.3f}, τ'={tau_prime_neutral:.3f}")
         print(f"  FP-heavy: τ={tau_fp:.3f}, τ'={tau_prime_fp:.3f}")
 

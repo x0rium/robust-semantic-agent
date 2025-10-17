@@ -51,11 +51,11 @@ class TestNavigationScenario:
         total_steps = 0
         filter_activation_count = 0
 
-        for episode in range(n_episodes):
+        for _episode in range(n_episodes):
             obs = env.reset()
             agent.reset()
 
-            for step in range(max_steps):
+            for _step in range(max_steps):
                 # Agent selects action
                 action, info = agent.act(obs)
 
@@ -120,7 +120,7 @@ class TestNavigationScenario:
 
         # Run for several steps
         belief_errors = []
-        for step in range(20):
+        for _step in range(20):
             action, info = agent.act(obs)
             obs_next, reward, done, env_info = env.step(action)
 
@@ -148,4 +148,6 @@ class TestNavigationScenario:
             assert mean_error < 1.0, f"Belief tracking diverged: mean_error={mean_error:.3f}"
             assert max_error < 2.0, f"Belief tracking unstable: max_error={max_error:.3f}"
 
-            print(f"\n✓ Belief tracking stable: mean_error={mean_error:.3f}, max_error={max_error:.3f}")
+            print(
+                f"\n✓ Belief tracking stable: mean_error={mean_error:.3f}, max_error={max_error:.3f}"
+            )

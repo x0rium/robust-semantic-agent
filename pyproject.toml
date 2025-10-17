@@ -112,6 +112,17 @@ exclude = '''
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+exclude = [
+    ".eggs",
+    ".git",
+    ".mypy_cache",
+    ".tox",
+    ".venv",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint]
 select = [
     "E",   # pycodestyle errors
     "W",   # pycodestyle warnings
@@ -126,20 +137,16 @@ select = [
 ignore = [
     "E501",  # line too long (handled by black)
     "B008",  # do not perform function calls in argument defaults
-]
-exclude = [
-    ".eggs",
-    ".git",
-    ".mypy_cache",
-    ".tox",
-    ".venv",
-    "build",
-    "dist",
+    "B023",  # function does not bind loop variable (intentional in closures)
+    "N803",  # argument name should be lowercase (scientific notation: A_c, K)
+    "N806",  # variable should be lowercase (scientific notation: H, V, B, K)
+    "N807",  # function name should not start/end with __ (module repr)
+    "SIM108", # use ternary operator (readability preference)
 ]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # unused imports in __init__.py
-"tests/*" = ["N802", "N803"]  # allow lowercase in test names
+"tests/*" = ["N802"]  # allow lowercase in test names
 
 [tool.mypy]
 python_version = "3.11"

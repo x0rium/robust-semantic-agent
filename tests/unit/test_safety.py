@@ -72,7 +72,7 @@ class TestQPSolve:
         u_safe, slack = safety_filter.filter(x, u_desired)
 
         # Should be close to desired (state is safe)
-        deviation = np.linalg.norm(u_safe - u_desired)
+        np.linalg.norm(u_safe - u_desired)
 
         # Slack should be ~0 (feasible)
         assert slack < 1e-5, f"Slack should be ~0 for feasible case, got {slack:.6f}"

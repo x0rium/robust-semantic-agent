@@ -109,7 +109,7 @@ class TestGossipSourceContradictions:
         total_steps = 0
 
         # Run 10 episodes
-        for ep in range(10):
+        for _ep in range(10):
             obs = env.reset()
             agent.reset()
             done = False
@@ -196,7 +196,7 @@ class TestGossipSourceContradictions:
         env.enable_gossip_source = True
 
         # Reset and step to potentially get messages
-        obs = env.reset()
+        env.reset()
 
         # Check if environment provides messages
         if hasattr(env, "get_messages"):
@@ -246,7 +246,7 @@ class TestGossipSourceContradictions:
         for k in range(K):
             belief = Belief(n_particles=100, state_dim=2)
             # Assign different logit values across the interval
-            logit_value = -lambda_s_high + (2 * lambda_s_high * k / (K - 1))
+            -lambda_s_high + (2 * lambda_s_high * k / (K - 1))
             # Use this to weight particles differently
             # (Implementation detail - this is a placeholder)
             belief.particles = np.random.randn(100, 2) + k * 0.2
@@ -334,7 +334,7 @@ class TestCredalSetIntegration:
         belief = Belief(n_particles=100, state_dim=2)
         belief.particles = np.random.randn(100, 2) * 0.3
 
-        action_belief = policy.select_action(belief)
+        policy.select_action(belief)
 
         # Credal set (K=3 with diverse means)
         posteriors = []

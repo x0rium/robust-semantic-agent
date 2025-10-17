@@ -55,15 +55,13 @@ class TestAgentPerformance:
         mean_time = np.mean(times)
         frequency_hz = 1.0 / mean_time if mean_time > 0 else float("inf")
 
-        print(f"\nBelief Update @ 10k particles:")
+        print("\nBelief Update @ 10k particles:")
         print(f"  Mean time: {mean_time*1000:.2f} ms")
         print(f"  Frequency: {frequency_hz:.1f} Hz")
-        print(f"  Target: ≥30 Hz (≤33.3 ms)")
+        print("  Target: ≥30 Hz (≤33.3 ms)")
 
         # SC-009: ≥30 Hz
-        assert (
-            frequency_hz >= 30.0
-        ), f"Belief update too slow: {frequency_hz:.1f} Hz < 30 Hz target"
+        assert frequency_hz >= 30.0, f"Belief update too slow: {frequency_hz:.1f} Hz < 30 Hz target"
 
     def test_safety_filter_performance(self):
         """
@@ -99,10 +97,10 @@ class TestAgentPerformance:
         mean_time = np.mean(times)
         frequency_hz = 1.0 / mean_time if mean_time > 0 else float("inf")
 
-        print(f"\nCBF-QP Filter:")
+        print("\nCBF-QP Filter:")
         print(f"  Mean time: {mean_time*1000:.2f} ms")
         print(f"  Frequency: {frequency_hz:.1f} Hz")
-        print(f"  Target: ≥30 Hz (≤33.3 ms)")
+        print("  Target: ≥30 Hz (≤33.3 ms)")
 
         assert frequency_hz >= 30.0, f"CBF-QP too slow: {frequency_hz:.1f} Hz < 30 Hz target"
 
@@ -159,18 +157,16 @@ class TestAgentPerformance:
         p95_time = np.percentile(times, 95)
         frequency_hz = 1.0 / mean_time if mean_time > 0 else float("inf")
 
-        print(f"\nFull Agent.act() @ 10k particles:")
+        print("\nFull Agent.act() @ 10k particles:")
         print(f"  Mean time: {mean_time*1000:.2f} ms")
         print(f"  P50 time: {p50_time*1000:.2f} ms")
         print(f"  P95 time: {p95_time*1000:.2f} ms")
         print(f"  Frequency: {frequency_hz:.1f} Hz")
-        print(f"  Target: ≥30 Hz (≤33.3 ms)")
+        print("  Target: ≥30 Hz (≤33.3 ms)")
 
         # SC-009: ≥30 Hz for full cycle
         if frequency_hz < 30.0:
-            print(
-                f"\n⚠️  WARNING: Performance below target: {frequency_hz:.1f} Hz < 30 Hz"
-            )
+            print(f"\n⚠️  WARNING: Performance below target: {frequency_hz:.1f} Hz < 30 Hz")
             print("  Consider optimizing:")
             print("  - Reduce particle count")
             print("  - Optimize belief update (vectorization)")
